@@ -6,17 +6,17 @@
 
 Game::Game()
 {
-	noOfMatches = 10;
+	noOfMatches = 1;
 	accJoe = 81;
 	accSid = 79;
 	playerTurn = 0;
 	joeWins = 0;
 	sidWins = 0;
-	joeBusts = 0;
-	sidBusts = 0;
-	joeFrq = 0;
-	sidFrq = 0;
-	bust = false;
+joeBusts = 0;
+sidBusts = 0;
+joeFrq = 0;
+sidFrq = 0;
+bust = false;
 }
 
 Game::~Game()
@@ -84,21 +84,46 @@ void Game::Play()
 					while (Joe.GetThrowsLeft() > 1)
 					{
 						// Throw a dart based on some logic
-						if ((Joe.GetScore() == 50) && (joeThrows == 1))
+						if ((Joe.GetScore() == 50) && (joeThrows == 1)) // If player can throw a bullseye to win try.
 						{
 							throw_score = Joe.ThrowBull(accJoe);
 						}
-						if ((Joe.GetScore() <= 40) && (joeThrows == 1))
+						else if ((Joe.GetScore() - set_score == 32) && (joeThrows == 1)) // If player can throw a Double 16 to win try
 						{
-							throw_score = Joe.ThrowDouble(((Joe.GetScore() - set_score) / 2));
+							throw_score = Joe.ThrowDouble(16);
 						}
-						// if score is less then 62, figure out what single is needed to make it possible to throw a double to win on last throw.
-						else if ((Joe.GetScore() - set_score) < 62)
+						else if (Joe.GetScore() <= 40 && (Joe.GetScore() % 2 == 0) && (joeThrows == 1)) // If player can throw a Double to win try
 						{
-							throw_score = Joe.ThrowSingle((Joe.GetScore() - set_score)); //this overflows because of the ThrowSingle player function, the d being passed in to the function.
-							// and goes out of bounds as d should only be a maximum value of 20 so when going out of bounds returns a number like 85million.
+							throw_score = Joe.ThrowDouble(Joe.GetScore() / 2);
 						}
-						else
+						else if (Joe.GetScore() <= 40 && (Joe.GetScore() % 2 == 1) && (joeThrows == 2)) // If player can throw a Single to make it possible to win on next throw try.
+						{
+							if (Joe.GetScore() > 3) // if greater than 3 throw a 3
+							{
+								throw_score = Joe.ThrowSingle(3);
+							}
+							else
+							{
+								throw_score = Joe.ThrowSingle(1); // else throw a 1
+							}
+						}
+						else if ((Joe.GetScore() - set_score) < 60 && (Joe.GetScore() - set_score) > 40) // If player's score is less than 60 but greater than 40 throw a single.
+						{
+							throw_score = Joe.ThrowSingle((Joe.GetScore() - set_score - 40));  // to bring it below 40.
+						}
+						else if ((Joe.GetScore() - set_score) > 63 && joeThrows == 3) // if score is above 63 and has three throws left.
+						{
+							throw_score = Joe.ThrowTreble(20, accJoe); //throw for treble 20.
+							if (throw_score > 60) // this block of code exists because sometimes the ThrowTreble function returned values higher than 60.
+							{
+								throw_score = 60;
+							}
+						}
+						else if ((Joe.GetScore() - set_score) < 63 && (Joe.GetScore() % 3 == 1))
+						{
+							throw_score = Joe.ThrowTreble(((Joe.GetScore() / 3) + 2), accJoe);
+						}
+						else // else throw for a treble 20.
 						{
 							throw_score = Joe.ThrowTreble(20, accJoe);
 							if (throw_score > 60)
@@ -177,14 +202,41 @@ void Game::Play()
 						{
 							throw_score = Sid.ThrowBull(accSid);
 						}
-						if ((Sid.GetScore() <= 40) && (sidThrows == 1))
+						else if ((Sid.GetScore() - set_score == 32) && (sidThrows == 1))
 						{
-							throw_score = Sid.ThrowDouble(((Sid.GetScore() - set_score) / 2));
+							throw_score = Sid.ThrowDouble(16);
 						}
-						else if ((Sid.GetScore() - set_score) < 62)
+						else if (Sid.GetScore() <= 40 && (Sid.GetScore() % 2 == 0) && (sidThrows == 1))
 						{
-							throw_score = Sid.ThrowSingle((Sid.GetScore() - set_score));//this overflows because of the ThrowSingle player function, the d being passed in to the function.
-							// and goes out of bounds as d should only be a maximum value of 20 so when going out of bounds returns a number like 85million.
+							throw_score = Sid.ThrowDouble(Sid.GetScore() / 2);
+						}
+						else if (Sid.GetScore() < 40 && (Sid.GetScore() % 2 == 1) && (sidThrows > 1))
+						{
+							if (Sid.GetScore() > 3)
+							{
+								throw_score = Sid.ThrowSingle(3);
+							}
+							else
+							{
+								throw_score = Sid.ThrowSingle(1);
+							}
+
+						}
+						else if ((Sid.GetScore() - set_score) < 60 && (Sid.GetScore() - set_score) > 40)
+						{
+							throw_score = Sid.ThrowSingle((Sid.GetScore() - set_score - 40));
+						}
+						else if ((Sid.GetScore() - set_score) > 63 && sidThrows == 3) // if score is above 63 and has three throws left.
+						{
+							throw_score = Sid.ThrowTreble(20, accSid); //throw for treble 20.
+							if (throw_score > 60) // this block of code exists because sometimes the ThrowTreble function returned values higher than 60.
+							{
+								throw_score = 60;
+							}
+						}
+						else if ((Sid.GetScore() - set_score) < 63 && (Sid.GetScore() % 3 == 1))
+						{
+							throw_score = Sid.ThrowTreble(((Sid.GetScore() / 3) + 2), accSid);
 						}
 						else
 						{
