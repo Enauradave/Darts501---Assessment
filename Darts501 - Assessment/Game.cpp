@@ -115,6 +115,14 @@ void Game::Play()
 						{
 							throw_score = Joe.ThrowSingle((Joe.GetScore() - set_score - 40));  // to bring it below 40.
 						}
+						else if ((Joe.GetScore() - set_score) < 63 && (Joe.GetScore() - set_score) > 40 && joeThrows == 3)
+						{
+							throw_score = Joe.ThrowTreble(20, accJoe); //throw for treble 20.
+							if (throw_score > 60) // this block of code exists because sometimes the ThrowTreble function returned values higher than 60.
+							{
+								throw_score = 60;
+							}
+						}
 						else if ((Joe.GetScore() - set_score) > 63 && joeThrows == 3) // if score is above 63 and has three throws left.
 						{
 							throw_score = Joe.ThrowTreble(20, accJoe); //throw for treble 20.
