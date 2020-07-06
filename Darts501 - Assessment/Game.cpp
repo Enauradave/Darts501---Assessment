@@ -84,7 +84,15 @@ void Game::Play()
 					while (Joe.GetThrowsLeft() > 1)
 					{
 						// Throw a dart based on some logic
-						if ((Joe.GetScore() == 50) && (joeThrows == 1)) // If player can throw a bullseye to win try.
+						if (Joe.GetScore() > 183)
+						{
+							throw_score = Joe.ThrowTreble(20, accJoe); //throw for treble 20.
+							if (throw_score > 60) // this block of code exists because sometimes the ThrowTreble function returned values higher than 60.
+							{
+								throw_score = 60;
+							}
+						}
+						else if ((Joe.GetScore() == 50) && (joeThrows == 1)) // If player can throw a bullseye to win try.
 						{
 							throw_score = Joe.ThrowBull(accJoe);
 						}
@@ -123,13 +131,9 @@ void Game::Play()
 						{
 							throw_score = Joe.ThrowTreble(((Joe.GetScore() / 3) + 2), accJoe);
 						}
-						else // else throw for a treble 20.
+						else // else throw for a 1.
 						{
-							throw_score = Joe.ThrowTreble(20, accJoe);
-							if (throw_score > 60)
-							{
-								throw_score = 60;
-							}
+							throw_score = Joe.ThrowSingle(1);
 						}
 
 						cout << "Throw: " << throw_score << "\n";
@@ -198,7 +202,15 @@ void Game::Play()
 					while (Sid.GetThrowsLeft() > 1)
 					{
 						// Throw a dart
-						if ((Sid.GetScore() == 50) && (sidThrows == 1))
+						if (Sid.GetScore() > 183)
+						{
+							throw_score = Sid.ThrowTreble(20, accSid); //throw for treble 20.
+							if (throw_score > 60) // this block of code exists because sometimes the ThrowTreble function returned values higher than 60.
+							{
+								throw_score = 60;
+							}
+						}
+						else if ((Sid.GetScore() == 50) && (sidThrows == 1))
 						{
 							throw_score = Sid.ThrowBull(accSid);
 						}
@@ -238,13 +250,9 @@ void Game::Play()
 						{
 							throw_score = Sid.ThrowTreble(((Sid.GetScore() / 3) + 2), accSid);
 						}
-						else
+						else // else throw for a 1.
 						{
-							throw_score = Sid.ThrowTreble(20, accSid);
-							if (throw_score > 60)
-							{
-								throw_score = 60;
-							}
+							throw_score = Sid.ThrowSingle(1);
 						}
 
 						cout << "Throw: " << throw_score << "\n";
