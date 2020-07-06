@@ -6,7 +6,7 @@
 
 Game::Game()
 {
-	noOfMatches = 1000;
+	noOfMatches = 10000;
 	setsWonJoe = 0;
 	setsWonSid = 0;
 	accJoe = 81;
@@ -511,20 +511,20 @@ void Game::Play()
 // displaying the data collected in the simulation
 void Game::Display()
 {
-	cout << "  7   :    0                                 " << (float)((counter[0] / (setsWonJoe + setsWonSid)) * 100) << "%\n";
-	cout << "  7   :    1                                 " << (float)((counter[1] / (setsWonJoe + setsWonSid)) * 100) << "%\n";
-	cout << "  7   :    2                                 " << (float)((counter[2] / (setsWonJoe + setsWonSid)) * 100) << "%\n";
-	cout << "  7   :    3                                 " << (float)((counter[3] / (setsWonJoe + setsWonSid)) * 100) << "%\n";
-	cout << "  7   :    4                                 " << (float)((counter[4] / (setsWonJoe + setsWonSid)) * 100) << "%\n";
-	cout << "  7   :    5                                 " << (float)((counter[5] / (setsWonJoe + setsWonSid)) * 100) << "%\n";
-	cout << "  7   :    6                                 " << (float)((counter[6] / (setsWonJoe + setsWonSid)) * 100) << "%\n";
-	cout << "  0   :    7                                 " << (float)((counter[7] / (setsWonJoe + setsWonSid)) * 100) << "%\n";
-	cout << "  1   :    7                                 " << (float)((counter[8] / (setsWonJoe + setsWonSid)) * 100) << "%\n";
-	cout << "  2   :    7                                 " << (float)((counter[9] / (setsWonJoe + setsWonSid)) * 100) << "%\n";
-	cout << "  3   :    7                                 " << (float)((counter[10] / (setsWonJoe + setsWonSid)) * 100) << "%\n";
-	cout << "  4   :    7                                 " << (float)((counter[11] / (setsWonJoe + setsWonSid)) * 100) << "%\n";
-	cout << "  5   :    7                                 " << (float)((counter[12] / (setsWonJoe + setsWonSid)) * 100) << "%\n";
-	cout << "  6   :    7                                 " << (float)((counter[13] / (setsWonJoe + setsWonSid)) * 100) << "%\n";
+	cout << "  7   :    0                                 " << (float)((counter[0] / ((float)setsWonJoe + (float)setsWonSid)) * 100) << "%\n";
+	cout << "  7   :    1                                 " << (float)((counter[1] / ((float)setsWonJoe + (float)setsWonSid)) * 100) << "%\n";
+	cout << "  7   :    2                                 " << (float)((counter[2] / ((float)setsWonJoe + (float)setsWonSid)) * 100) << "%\n";
+	cout << "  7   :    3                                 " << (float)((counter[3] / ((float)setsWonJoe + (float)setsWonSid)) * 100) << "%\n";
+	cout << "  7   :    4                                 " << (float)((counter[4] / ((float)setsWonJoe + (float)setsWonSid)) * 100) << "%\n";
+	cout << "  7   :    5                                 " << (float)((counter[5] / ((float)setsWonJoe + (float)setsWonSid)) * 100) << "%\n";
+	cout << "  7   :    6                                 " << (float)((counter[6] / ((float)setsWonJoe + (float)setsWonSid)) * 100) << "%\n";
+	cout << "  0   :    7                                 " << (float)((counter[7] / ((float)setsWonJoe + (float)setsWonSid)) * 100) << "%\n";
+	cout << "  1   :    7                                 " << (float)((counter[8] / ((float)setsWonJoe + (float)setsWonSid)) * 100) << "%\n";
+	cout << "  2   :    7                                 " << (float)((counter[9] / ((float)setsWonJoe + (float)setsWonSid)) * 100) << "%\n";
+	cout << "  3   :    7                                 " << (float)((counter[10] / ((float)setsWonJoe + (float)setsWonSid)) * 100) << "%\n";
+	cout << "  4   :    7                                 " << (float)((counter[11] / ((float)setsWonJoe + (float)setsWonSid)) * 100) << "%\n";
+	cout << "  5   :    7                                 " << (float)((counter[12] / ((float)setsWonJoe + (float)setsWonSid)) * 100) << "%\n";
+	cout << "  6   :    7                                 " << (float)((counter[13] / ((float)setsWonJoe + (float)setsWonSid)) * 100) << "%\n";
 
 	cout << "Number of wins - Joe: " << joeWinsTotal << "  Sid: " << sidWinsTotal << "\n";
 	//cout << "Number of busts - Joe: " << joeBusts << "  Sid: " << sidBusts << "\n";
