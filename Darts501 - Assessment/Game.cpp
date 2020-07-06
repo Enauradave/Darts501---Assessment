@@ -6,7 +6,7 @@
 
 Game::Game()
 {
-	noOfMatches = 1;
+	noOfMatches = 10000;
 	accJoe = 81;
 	accSid = 79;
 	playerTurn = 0;
@@ -96,13 +96,13 @@ void Game::Play()
 							throw_score = Joe.ThrowTreble(19, accJoe);
 						}
 						// if score is greater than 69 and has more than 1 throw left 
-						if ((Joe.GetScore() - set_score > 199) && joeThrows > 1)
+						if ((Joe.GetScore() - set_score > 199) && (joeThrows > 1))
 						{
 							//aim for 20
 							throw_score = Joe.ThrowTreble(20, accJoe);
 						}
 						// if score is between 51 and 70 and have 2 throws left
-						else if ((Joe.GetScore() - set_score) <= 70 && (Joe.GetScore() - set_score) > 50 && joeThrows == 2)
+						else if ((Joe.GetScore() - set_score) <= 70 && (Joe.GetScore() - set_score) > 50 && (joeThrows == 2))
 						{
 							// aim for the single to take them to 50.
 							throw_score = Joe.ThrowSingle((Joe.GetScore() - set_score) - 50);
@@ -153,6 +153,10 @@ void Game::Play()
 								// aim for 1
 								throw_score = Joe.ThrowSingle(1);
 							}
+						}
+						else
+						{
+							throw_score = Joe.ThrowTreble(20, accJoe);
 						}
 
 						/*-----------------------THROWING LOGIC ENDS---------------------------------*/
@@ -236,13 +240,13 @@ void Game::Play()
 							throw_score = Sid.ThrowTreble(19, accSid);
 						}
 						// if score is greater than 69 and has more than 1 throw left 
-						if ((Sid.GetScore() - set_score > 199) && sidThrows > 1)
+						if ((Sid.GetScore() - set_score > 199) && (sidThrows > 1))
 						{
 							//aim for 20
 							throw_score = Sid.ThrowTreble(20, accSid);
 						}
 						// if score is between 51 and 70 and have 2 throws left
-						else if ((Sid.GetScore() - set_score) <= 70 && (Sid.GetScore() - set_score) > 50 && sidThrows == 2)
+						else if ((Sid.GetScore() - set_score) <= 70 && (Sid.GetScore() - set_score) > 50 && (sidThrows == 2))
 						{
 							// aim for the single to take them to 50.
 							throw_score = Sid.ThrowSingle((Sid.GetScore() - set_score) - 50);
@@ -293,6 +297,10 @@ void Game::Play()
 								// aim for 1
 								throw_score = Sid.ThrowSingle(1);
 							}
+						}
+						else
+						{
+							throw_score = Sid.ThrowTreble(20, accSid);
 						}
 
 						/*---------------------THROWING LOGIC ENDS-----------------------*/
