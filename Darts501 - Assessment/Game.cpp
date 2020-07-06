@@ -83,8 +83,8 @@ void Game::Play()
 					// while Joe's turn
 					while (Joe.GetThrowsLeft() > 1)
 					{
-						// Throw a dart based on some logic
-						if (Joe.GetScore() > 183)
+						/*--------------------------------------THROWING LOGIC STARTS-----------------------------------------------*/
+						if (Joe.GetScore() >= 63) //if score is over 183.
 						{
 							throw_score = Joe.ThrowTreble(20, accJoe); //throw for treble 20.
 							if (throw_score > 60) // this block of code exists because sometimes the ThrowTreble function returned values higher than 60.
@@ -96,23 +96,19 @@ void Game::Play()
 						{
 							throw_score = Joe.ThrowBull(accJoe);
 						}
-						else if ((Joe.GetScore() - set_score == 32) && (joeThrows == 1)) // If player can throw a Double 16 to win try
-						{
-							throw_score = Joe.ThrowDouble(16);
-						}
 						else if (Joe.GetScore() <= 40 && (Joe.GetScore() % 2 == 0) && (joeThrows == 1)) // If player can throw a Double to win try
 						{
 							throw_score = Joe.ThrowDouble(Joe.GetScore() / 2);
 						}
 						else if (Joe.GetScore() <= 40 && (Joe.GetScore() % 2 == 1) && (joeThrows == 2)) // If player can throw a Single to make it possible to win on next throw try.
 						{
-							if (Joe.GetScore() > 3) // if greater than 3 throw a 3
+							if (Joe.GetScore() > 3) // if greater than 3 throw for a 3
 							{
 								throw_score = Joe.ThrowSingle(3);
 							}
 							else
 							{
-								throw_score = Joe.ThrowSingle(1); // else throw a 1
+								throw_score = Joe.ThrowSingle(1); // else throw for a 1
 							}
 						}
 						else if ((Joe.GetScore() - set_score) < 60 && (Joe.GetScore() - set_score) > 40) // If player's score is less than 60 but greater than 40 throw a single.
@@ -135,6 +131,9 @@ void Game::Play()
 						{
 							throw_score = Joe.ThrowSingle(1);
 						}
+
+						/*-----------------------THROWING LOGIC ENDS---------------------------------*/
+
 
 						cout << "Throw: " << throw_score << "\n";
 
@@ -201,8 +200,9 @@ void Game::Play()
 					// while sid's turn
 					while (Sid.GetThrowsLeft() > 1)
 					{
-						// Throw a dart
-						if (Sid.GetScore() > 183)
+						/*THROWING LOGIC STARTS*/
+
+						if (Sid.GetScore() > 63)
 						{
 							throw_score = Sid.ThrowTreble(20, accSid); //throw for treble 20.
 							if (throw_score > 60) // this block of code exists because sometimes the ThrowTreble function returned values higher than 60.
@@ -214,13 +214,21 @@ void Game::Play()
 						{
 							throw_score = Sid.ThrowBull(accSid);
 						}
-						else if ((Sid.GetScore() - set_score == 32) && (sidThrows == 1))
-						{
-							throw_score = Sid.ThrowDouble(16);
-						}
 						else if (Sid.GetScore() <= 40 && (Sid.GetScore() % 2 == 0) && (sidThrows == 1))
 						{
 							throw_score = Sid.ThrowDouble(Sid.GetScore() / 2);
+						}
+						else if (Sid.GetScore() < 40 && (Sid.GetScore() % 2 == 1) && (sidThrows > 2))
+						{
+							if (Sid.GetScore() > 5)
+							{
+								throw_score = Sid.ThrowSingle(3);
+							}
+							else
+							{
+								throw_score = Sid.ThrowSingle(1);
+							}
+
 						}
 						else if (Sid.GetScore() < 40 && (Sid.GetScore() % 2 == 1) && (sidThrows > 1))
 						{
@@ -254,6 +262,8 @@ void Game::Play()
 						{
 							throw_score = Sid.ThrowSingle(1);
 						}
+
+						/*THROWING LOGIC ENDS*/
 
 						cout << "Throw: " << throw_score << "\n";
 
