@@ -25,7 +25,6 @@ public:
 	void SetThrowsLeft(int throws);
 	bool GetHasWon();
 	void SetHasWon(bool won);
-	int Aim();
 
 protected:
 	int playerScore;

@@ -90,7 +90,6 @@ void Game::Play()
 					{
 						/*--------------------------------------THROWING LOGIC STARTS-----------------------------------------------*/
 						
-						// old logic see sid for new
 						
 						if (Sid.GetScore() - set_score == 2)
 						{
@@ -391,6 +390,7 @@ void Game::Play()
 			joeWins++;
 			joeWinsTotal++;
 
+			// if wins equals 7 compare scores through if statements increment the element in the correct array location and reset the Win counters to 0.
 			if (joeWins == 7 && sidWins == 0)
 			{
 				counter[0]++;
